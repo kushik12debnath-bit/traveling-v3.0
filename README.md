@@ -2,6 +2,12 @@
 
 Version 3.0 of the Alive Dreams Holidays website — a premium, editorial multi-page experience built as fast, dependency-free static HTML with a shared design system and a progressive-enhancement interaction layer. This is a separate copy of the site so the previous version remains untouched.
 
+## Live links
+
+- **Production:** https://traveling-v3-0.vercel.app
+- **GitHub:** https://github.com/kushik12debnath-bit/traveling-v3.0
+- **Local:** http://localhost:5174
+
 ## Local preview
 
 ```bash
