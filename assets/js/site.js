@@ -68,17 +68,41 @@
     dropBtn.setAttribute("aria-expanded", String(open));
   }
   if (dropBtn) {
+    var dropCloseTimer = null;
+    function clearDropClose() {
+      if (dropCloseTimer) {
+        clearTimeout(dropCloseTimer);
+        dropCloseTimer = null;
+      }
+    }
+    function closeDropSoon() {
+      clearDropClose();
+      dropCloseTimer = setTimeout(function () {
+        setDrop(false);
+        dropCloseTimer = null;
+      }, 180);
+    }
     dropBtn.addEventListener("click", function (e) {
       e.stopPropagation();
+      clearDropClose();
       // Hover already previews the menu; a click should keep it open rather
       // than immediately toggling it closed under the pointer.
       if (drop.classList.contains("open") && !drop.matches(":hover")) setDrop(false);
       else setDrop(true);
     });
-    drop.addEventListener("mouseenter", function () { setDrop(true); });
-    drop.addEventListener("mouseleave", function () { setDrop(false); });
+    drop.addEventListener("mouseenter", function () {
+      clearDropClose();
+      setDrop(true);
+    });
+    // The menu sits 12px below the button. Keep a short grace period so
+    // crossing that gap does not close the menu before it can be used.
+    drop.addEventListener("mouseleave", closeDropSoon);
+    drop.addEventListener("focusin", clearDropClose);
     doc.addEventListener("click", function (e) {
-      if (!drop.contains(e.target)) setDrop(false);
+      if (!drop.contains(e.target)) {
+        clearDropClose();
+        setDrop(false);
+      }
     });
     drop.addEventListener("focusout", function (e) {
       if (!drop.contains(e.relatedTarget)) setDrop(false);
