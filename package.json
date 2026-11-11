@@ -1,0 +1,10 @@
+{
+  "name": "traveling-v3.0",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Traveling v3.0 - premium static website for Alive Dreams Holidays, Kolkata",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
